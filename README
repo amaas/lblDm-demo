@@ -18,6 +18,13 @@ run the visualization to see how learned representations cluster:
 run_tsne;
 
 
+Dependencies::
+You need to have minFunc and t-sne, both of which are available online.
+The code assumes that these libraries are setup in the root directory.
+If you have them elsewhere, you simply need to find and modify the
+relevant addpath calls.
+
+
 Details::
 The demo uses data from flickr tags. Each document is the set of tags
 associated with an image in flickr. The dataset is a derivative of
