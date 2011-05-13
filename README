@@ -1,0 +1,57 @@
+This code runs the log-bilinear document model (lblDm) described
+in:
+Andrew L. Maas and Andrew Y. Ng. (2010). 
+A Probabilistic Model for Semantic Word Vectors. 
+NIPS 2010 Workshop on Deep Learning and Unsupervised Feature Learning.
+
+
+How to run the code::
+open matlab
+if you can, open a matlabpool as it will help the code run faster.
+In matlab on my multi-core system I do this with:
+matlabpool open local;
+
+run the learning procedure for the model:
+run_lblDm;
+
+run the visualization to see how learned representations cluster:
+run_tsne;
+
+
+Details::
+The demo uses data from flickr tags. Each document is the set of tags
+associated with an image in flickr. The dataset is a derivative of
+the NUS-WIDE dataset:
+http://lms.comp.nus.edu.sg/research/NUS-WIDE.htm
+
+The demo is currently set to learn word vectors for 1k words using
+100k documents. The top 1k words are used after ignoring the 50
+most frequently occuring words (common stop word removal). This is
+a fairly small demo, but it runs quickly. 
+
+The code uses alternating optimization, where both subproblems are
+optimized with the minFunc package. First, the MAP estimates for the
+document coefficients theta are updated. This requires solving number
+of documents small optimization problems. The code is set to use a
+parfor loop, so if you have a matlabpool open it will likely run much
+faster on a multi-core machine. In the second phase, the word
+representations are updated which is a large, single optimization
+problem. This alternating procedure contunues until the maximum number
+of algorithm iterations is reached. For this demo, the model converges
+much sooner than the maximum number of outer iterations. You can see
+this happening when the word representation optimization stops within
+a few iterations.
+
+The visualization step clusters the learned word representations using
+the t-sne algorithm. A 2-D plot is then displayed and gives some sense
+of how the word representations define similarity among words.
+
+References for supporting code:
+MinFunc:
+http://www.cs.ubc.ca/~schmidtm/Software/minFunc.html
+
+t-SNE:
+http://homepage.tudelft.nl/19j49/t-SNE.html
+L.J.P. van der Maaten and G.E. Hinton. 
+Visualizing High-Dimensional Data Using t-SNE. 
+Journal of Machine Learning Research 9(Nov):2579-2605, 2008.
