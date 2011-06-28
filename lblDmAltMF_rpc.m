@@ -17,7 +17,7 @@ options.DerivativeCheck = 'off';
 
 % load data into worker global state
 % loading the first numDocs examples without randomly permuting
-numLoaded=slaveLoadBOW(1:modelParams.NumDocs, modelParams.BowFname, modelParams.DictSize);
+numLoaded=slaveLoadBOW((1:modelParams.NumDocs)', modelParams.BowFname, modelParams.DictSize);
 assert(numLoaded == modelParams.NumDocs);
 
 % pass modelParams to worker global state

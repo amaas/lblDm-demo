@@ -44,8 +44,8 @@ for batchStart = 1 : modelParams.BatchSize : numDocs
     %    - state.docLen' * full(sum(cur_docBOW .* log(docProbs+eps), 2));
     objVal = objVal + docProbObj;
     % derivatives are difference of expectations
-    % weight docThetas by docLen to handle dot multiply of len for each doc
-    cur_docThetaMat = bsxfun(@times, cur_docThetaMat, state.docLen');
+    % weight docThetas by docLen to handle dot multiply of len for each doc    
+    cur_docThetaMat = bsxfun(@times, cur_docThetaMat, cur_docLen');
     objGrad(rcIndex) = objGrad(rcIndex) - ...
         reshape((cur_docThetaMat * cur_docBOW - cur_docThetaMat * docProbs)', [], 1);
     % bias derivative is just the word probabilities

@@ -12,7 +12,7 @@ data_docBOW = S.data_docBOW;
 % trim number of docs, or select specific indices
 % ignore top 50 words as they're much more frequent (power/zipf law)
 data_docBOW = data_docBOW(:,51:(vocabSize+50));
-% remove docs with 0 counts
+% remove docs with few tags
 data_docBOW = data_docBOW(sum(data_docBOW,2)>2,:);
 data_docBOW = data_docBOW(docInd,:);
 
